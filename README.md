@@ -1,4 +1,4 @@
-# D3.js Network Force Demo
+# D3.js Network Force Js
 
 This demo lets you interactively try various settings and combinations of forces for [d3-force](https://github.com/d3/d3-force).
 
