@@ -19,6 +19,8 @@ export { forceProperties, updateAll };
 
 index.html
 ```
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script type="module" src="/main.js"></script>
 <script type="module">
   import { forceProperties, updateAll } from "./main.js";
   window.forceProperties = forceProperties;
