@@ -1,36 +1,18 @@
 import './style.css'
 
-var svg = d3.select("svg"),
+let svg = d3.select("svg"),
     width = +svg.node().getBoundingClientRect().width,
     height = +svg.node().getBoundingClientRect().height;
 
 // svg objects
-var link, node;
+let link, node;
 // the data - an object with nodes and links
-var graph;
+let graph;
 
-// load the data
-d3.json("miserables.json", function (error, _graph) {
-    if (error) throw error;
-    graph = _graph;
-    initializeDisplay();
-    initializeSimulation();
-});
-
-//////////// FORCE SIMULATION ////////////
-
-// force simulator
-var simulation = d3.forceSimulation();
-
-// set up the simulation and event to update locations after each tick
-function initializeSimulation() {
-    simulation.nodes(graph.nodes);
-    initializeForces();
-    simulation.on("tick", ticked);
-}
+let simulation;
 
 // values for all forces
-var forceProperties = {
+let forceProperties = {
     center: {
         x: 0.5,
         y: 0.5
@@ -62,6 +44,14 @@ var forceProperties = {
         distance: 30,
         iterations: 1
     }
+}
+
+// set up the simulation and event to update locations after each tick
+function initializeSimulation() {
+    simulation = d3.forceSimulation();
+    simulation.nodes(graph.nodes);
+    initializeForces();
+    simulation.on("tick", ticked);
 }
 
 // add forces to the simulation
@@ -147,7 +137,7 @@ function updateDisplay() {
     node
         .attr("r", forceProperties.collide.radius)
         .attr("stroke", forceProperties.charge.strength > 0 ? "blue" : "red")
-        .attr("stroke-width", forceProperties.charge.enabled == false ? 0 : Math.abs(forceProperties.charge.strength) / 15);
+        .attr("stroke-width", forceProperties.charge.enabled ?  Math.abs(forceProperties.charge.strength) / 15 : 0);
 
     link
         .attr("stroke-width", forceProperties.link.enabled ? 1 : .5)
@@ -200,17 +190,29 @@ function dragended(d) {
     d.fy = null;
 }
 
-// update size-related forces
-d3.select(window).on("resize", function () {
-    width = +svg.node().getBoundingClientRect().width;
-    height = +svg.node().getBoundingClientRect().height;
-    updateForces();
-});
-
 // convenience function to update everything (run after UI input)
 function updateAll() {
     updateForces();
     updateDisplay();
 }
 
-export { forceProperties, updateAll };
+function onLoaded(_event) {
+    // load the data
+    d3.json("miserables.json", function (error, _graph) {
+        if (error) throw error;
+        graph = _graph;
+        initializeDisplay();
+        initializeSimulation();
+
+        // update size-related forces
+        d3.select(window).on("resize", function () {
+            width = +svg.node().getBoundingClientRect().width;
+            height = +svg.node().getBoundingClientRect().height;
+            updateForces();
+        });
+    });
+}
+
+window.addEventListener("load", (event) => onLoaded(event));
+
+export {forceProperties, updateAll};
