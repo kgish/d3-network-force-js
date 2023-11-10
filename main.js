@@ -1,11 +1,10 @@
 import './style.css'
 
-let svg = d3.select("svg"),
-    width = +svg.node().getBoundingClientRect().width,
-    height = +svg.node().getBoundingClientRect().height;
+let svg, width, height;
 
 // svg objects
 let link, node;
+
 // the data - an object with nodes and links
 let graph;
 
@@ -197,6 +196,10 @@ function updateAll() {
 }
 
 function onLoaded(_event) {
+    svg = d3.select("svg");
+    width = +svg.node().getBoundingClientRect().width;
+    height = +svg.node().getBoundingClientRect().height;
+
     // load the data
     d3.json("miserables.json", function (error, _graph) {
         if (error) throw error;
