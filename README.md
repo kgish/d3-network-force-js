@@ -1,23 +1,31 @@
 # D3.js Network Force Js
 
-This demo lets you interactively try various settings and combinations of forces for [d3-force](https://github.com/d3/d3-force).
+This demo lets you interactively try various settings and combinations of forces
+for [d3-force](https://github.com/d3/d3-force).
 
-It's based on [Mike Bostock's](https://bost.ocks.org/) example code for a [force directed graph](http://bl.ocks.org/mbostock/2675ff61ea5e063ede2b5d63c08020c7).
+It's based on [Mike Bostock's](https://bost.ocks.org/) example code for
+a [force directed graph](http://bl.ocks.org/mbostock/2675ff61ea5e063ede2b5d63c08020c7).
 
 Using version `d3.v4` : `vanilla-js`.
+
+## Screenshot
+
+<kbd><img src="https://github.com/kgish/d3-network-force-js/blob/master/public/screenshot.png " /></kbd>
 
 ## Caveats
 
 In order to get the demo working properly, I had to make the following changes.
 
-Added the following 
+Added the following
 
 main.js
+
 ```
 export { forceProperties, updateAll };
 ```
 
 index.html
+
 ```
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script type="module" src="/main.js"></script>
