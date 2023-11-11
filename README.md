@@ -10,7 +10,7 @@ Using version `d3.v4` : `vanilla-js`.
 
 ## Screenshot
 
-<kbd><img src="https://github.com/kgish/d3-network-force-js/blob/master/public/screenshot.png" /></kbd>
+<img src="https://github.com/kgish/d3-network-force-js/blob/master/public/screenshot.png" alt="screenshot"/>
 
 ## Caveats
 
